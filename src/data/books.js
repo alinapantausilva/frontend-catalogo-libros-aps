@@ -1,0 +1,32 @@
+export const books = [
+  {
+    id: "1",
+    title: "Cien años de soledad",
+    author: "Gabriel García Márquez",
+    genre: "Realismo mágico",
+    year: 1967,
+    pages: 417,
+    description: "La historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo.",
+    image: "https://picsum.photos/seed/cien/300/400",
+  },
+  {
+    id: "2",
+    title: "El nombre de la rosa",
+    author: "Umberto Eco",
+    genre: "Misterio histórico",
+    year: 1980,
+    pages: 502,
+    description: "Un monje franciscano investiga una serie de muertes misteriosas en una abadía medieval.",
+    image: "https://picsum.photos/seed/rosa/300/400",
+  },
+  {
+    id: "3",
+    title: "1984",
+    author: "George Orwell",
+    genre: "Distopía",
+    year: 1949,
+    pages: 328,
+    description: "Una sociedad totalitaria dominada por el Gran Hermano.",
+    image: "https://picsum.photos/seed/1984/300/400",
+  },
+];

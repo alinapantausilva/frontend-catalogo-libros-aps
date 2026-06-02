@@ -4,6 +4,7 @@ function App() {
 
   return (
     <> 
+    <h1>¡Bienvenido al catálogo de libros!</h1>
     </>
   )
 }
