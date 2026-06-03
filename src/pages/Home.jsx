@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { books } from "../data/books";
+import { useBooks } from "../context/BooksContext";
 import BookCard from "../components/BookCard";
 
 function Home() {
+  const { books } = useBooks();
   const [search, setSearch] = useState("");
 
   const filtered = books.filter(b =>
