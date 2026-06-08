@@ -17,6 +17,7 @@ Aplicación web para gestionar un catálogo de libros
 
 ```shell
 git clone <url_repo>
+git switch dev
 ```
 
 ## Cómo ejecutar el proyecto
