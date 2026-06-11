@@ -1,10 +1,14 @@
-import { createContext, useContext, useState } from "react";
-import { books as initialBooks } from "../data/books";
+import { createContext, useContext, useState, useEffect } from "react";
+import { getBooks } from "../services/books.service";
 
 const BooksContext = createContext();
 
 export function BooksProvider({ children }) {
-  const [books, setBooks] = useState(initialBooks);
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    getBooks().then(data => setBooks(data));
+  }, []);
 
   return (
     <BooksContext.Provider value={{ books }}>
