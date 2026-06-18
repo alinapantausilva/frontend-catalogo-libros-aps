@@ -1,6 +1,11 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Navigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function AdminLayout() {
+  const { isAdmin, logout } = useAuth();
+
+  if (!isAdmin) return <Navigate to="/login" replace />;
+
   return (
     <>
       <header className="site-header">
@@ -9,6 +14,7 @@ function AdminLayout() {
           <nav>
             <Link to="/admin">Dashboard</Link>
             <Link to="/admin/books">Libros</Link>
+            <button onClick={logout}>Cerrar sesión</button>
           </nav>
         </div>
       </header>

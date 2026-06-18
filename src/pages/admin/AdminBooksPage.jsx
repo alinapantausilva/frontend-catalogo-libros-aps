@@ -1,35 +1,43 @@
-import { useState } from "react";
-import { books as initialBooks } from "../../data/books";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { getBooks, createBook, updateBook, deleteBook } from "../../services/books.service";
 import BookForm from "../../components/BookForm";
 
 function AdminBooksPage() {
-  const [books, setBooks] = useState(initialBooks);
+  const { token } = useAuth();
+  const [books, setBooks] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    getBooks().then(data => setBooks(data));
+  }, []);
 
   function showMessage(msg) {
     setMessage(msg);
     setTimeout(() => setMessage(""), 3000);
   }
 
-  function handleCreateBook(data) {
-    const newBook = { ...data, id: String(Date.now()) };
+  async function handleCreateBook(data) {
+    const newBook = await createBook(data, token);
     setBooks([...books, newBook]);
     setShowForm(false);
     showMessage("Libro creado correctamente");
   }
 
-  function handleUpdateBook(id, data) {
-    setBooks(books.map(b => b.id === id ? { ...b, ...data } : b));
+  async function handleUpdateBook(id, data) {
+    const updated = await updateBook(id, data, token);
+    setBooks(books.map(b => b._id === id ? updated : b));
     setSelectedBook(null);
     setShowForm(false);
     showMessage("Libro actualizado correctamente");
   }
 
-  function handleDeleteBook(id) {
+  async function handleDeleteBook(id) {
     if (!confirm("¿Deseas eliminar este libro?")) return;
-    setBooks(books.filter(b => b.id !== id));
+    await deleteBook(id, token);
+    setBooks(books.filter(b => b._id !== id));
     showMessage("Libro eliminado correctamente");
   }
 
@@ -54,7 +62,7 @@ function AdminBooksPage() {
 
       <div className="admin-list">
         {books.map(book => (
-          <div key={book.id} className="admin-card">
+          <div key={book._id} className="admin-card">
             <img src={book.image} alt={book.title} />
             <div>
               <h3>{book.title}</h3>
@@ -62,7 +70,7 @@ function AdminBooksPage() {
             </div>
             <div className="admin-actions">
               <button onClick={() => { setSelectedBook(book); setShowForm(true); }}>Editar</button>
-              <button onClick={() => handleDeleteBook(book.id)}>Eliminar</button>
+              <button onClick={() => handleDeleteBook(book._id)}>Eliminar</button>
             </div>
           </div>
         ))}
