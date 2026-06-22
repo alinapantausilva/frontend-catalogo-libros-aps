@@ -9,12 +9,12 @@ function DashboardPage() {
       <h1>Panel de administración</h1>
       <p>Bienvenido al panel de administración de Bibliocat.</p>
 
-      <div className="dashboard-stats">
+     {  <div className="dashboard-stats">
         <div className="stat-card">
           <h2>{books.length}</h2>
           <p>Libros en el catálogo</p>
         </div>
-      </div>
+      </div> }
 
       <div className="dashboard-nav">
         <Link to="/admin/books">Gestionar libros</Link>

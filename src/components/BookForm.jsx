@@ -29,7 +29,7 @@ function BookForm({ onCreateBook, onUpdateBook, book }) {
     if (!form.year) { alert("Ingresa el año"); return; }
 
     if (isEditing) {
-      onUpdateBook(book.id, form);
+      onUpdateBook(book._id, form);
     } else {
       onCreateBook(form);
     }

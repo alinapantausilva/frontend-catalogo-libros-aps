@@ -10,7 +10,7 @@ export async function getBookById(id) {
   return res.json();
 }
 
-export async function createBook(data) {
+/* export async function createBook(data) {
   const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -31,6 +31,40 @@ export async function updateBook(id, data) {
 export async function deleteBook(id) {
   const res = await fetch(`${API_URL}/${id}`, {
     method: "DELETE",
+  });
+  return res.json();
+} */
+
+  export async function createBook(data, token) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
+export async function updateBook(id, data, token) {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
+export async function deleteBook(id, token) {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
   });
   return res.json();
 }
