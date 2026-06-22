@@ -1,11 +1,20 @@
 import { useParams, Link } from "react-router-dom";
-import { books } from "../data/books";
+import { useEffect, useState } from "react";
+import { getBookById } from "../services/books.service";
 
 function BookDetailPage() {
   const { id } = useParams();
-  const book = books.find(b => b.id === id);
+  const [book, setBook] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!book) return <p>Libro no encontrado</p>;
+  useEffect(() => {
+    getBookById(id)
+      .then(data => setBook(data))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <p>Cargando...</p>;
+  if (!book || book.message) return <p>Libro no encontrado</p>;
 
   return (
     <main className="page">

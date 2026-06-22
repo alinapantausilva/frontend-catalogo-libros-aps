@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function BookCard({ book }) {
   return (
-    <Link to={`/book/${book.id}`} className="book-card">
+    <Link to={`/book/${book._id}`} className="book-card">
       <img src={book.image} alt={book.title} />
       <div className="book-body">
         <span className="badge">{book.genre}</span>
