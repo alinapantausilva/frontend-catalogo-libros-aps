@@ -20,7 +20,7 @@ function BookDetailPage() {
     <main className="page">
       <Link to="/">← Volver al catálogo</Link>
       <div className="book-detail">
-        <img src={book.image} alt={book.title} />
+        <img src={`/${book.image}`} alt={book.title} />
         <div>
           <span className="badge">{book.genre}</span>
           <h1>{book.title}</h1>

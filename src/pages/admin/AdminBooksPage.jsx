@@ -63,7 +63,7 @@ function AdminBooksPage() {
       <div className="admin-list">
         {books.map(book => (
           <div key={book._id} className="admin-card">
-            <img src={book.image} alt={book.title} />
+            <img src={`/${book.image}`} alt={book.title} />
             <div>
               <h3>{book.title}</h3>
               <p>{book.author} · {book.year}</p>
