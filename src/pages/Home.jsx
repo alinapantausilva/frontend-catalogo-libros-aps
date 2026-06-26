@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { useBooks } from "../context/BooksContext";
 import BookCard from "../components/BookCard";
+import BookFilters from "../components/BookFilters";
 
 function Home() {
   const { books } = useBooks();
-  const [search, setSearch] = useState("");
+  const [filters, setFilters] = useState({ search: "", genre: "", year: "" });
 
-  const filtered = books.filter(b =>
-    b.title.toLowerCase().includes(search.toLowerCase()) ||
-    b.author.toLowerCase().includes(search.toLowerCase())
-  );
+  const genres = [...new Set(books.map(b => b.genre))].sort();
+  const years = [...new Set(books.map(b => b.year))].sort((a, b) => b - a);
+
+  const filtered = books.filter(b => {
+    const matchSearch =
+      b.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+      b.author.toLowerCase().includes(filters.search.toLowerCase());
+    const matchGenre = filters.genre ? b.genre === filters.genre : true;
+    const matchYear = filters.year ? b.year === Number(filters.year) : true;
+    return matchSearch && matchGenre && matchYear;
+  });
 
   return (
     <main>
@@ -22,16 +30,21 @@ function Home() {
 
       <section className="catalog-section">
         <div className="container">
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Buscar por título o autor..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
+          <BookFilters
+            filters={filters}
+            onChange={setFilters}
+            genres={genres}
+            years={years}
           />
-          <div className="book-list">
-            {filtered.map(book => <BookCard key={book.id} book={book} />)}
-          </div>
+          {filtered.length === 0 ? (
+            <p className="no-results">No hay libros que coincidan con tu búsqueda.</p>
+          ) : (
+            <div className="book-list">
+              {filtered.map(book => (
+                <BookCard key={book._id} book={book} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>
