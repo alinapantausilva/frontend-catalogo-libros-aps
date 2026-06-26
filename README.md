@@ -5,7 +5,7 @@ Aplicación web desarrollada con React para consultar, buscar y administrar libr
 ## Características
 
 - Listado de libros
-- Búsqueda por título o autor en tiempo real
+- Filtros por título, autor, género y año en tiempo real
 - Vista de detalle de cada libro
 - Panel de administración
 - Crear libros
@@ -147,6 +147,10 @@ VITE_API_URL
 ## Estructura del proyecto
 
 ```txt
+public/
+│
+└── books/          ← imágenes locales de los libros
+
 src/
 │
 ├── components/
