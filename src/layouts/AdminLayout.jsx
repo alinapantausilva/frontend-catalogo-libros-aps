@@ -14,7 +14,7 @@ function AdminLayout() {
           <nav>
             <Link to="/admin">Dashboard</Link>
             <Link to="/admin/books">Libros</Link>
-            <button onClick={logout}>Cerrar sesión</button>
+            <button className="logout-btn" onClick={logout}>Cerrar sesión</button>
           </nav>
         </div>
       </header>

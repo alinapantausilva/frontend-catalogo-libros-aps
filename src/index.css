@@ -381,6 +381,25 @@ img { max-width: 100%; display: block; }
   }
 }
 
+/* Logout button */
+.logout-btn {
+  padding: 6px 16px;
+  background: transparent;
+  color: #c0392b;
+  border: 1px solid #c0392b;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+
 /* Responsive, media queries */
 @media (min-width: 768px) {
   .book-list { grid-template-columns: 1fr 1fr; }
